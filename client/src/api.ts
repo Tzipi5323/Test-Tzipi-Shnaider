@@ -1,0 +1,34 @@
+
+import type { DrawCommand } from './types';
+
+
+// פענוח פרומפט ע"י LLM
+export async function decodePrompt(prompt: string): Promise<DrawCommand[]> {
+  const res = await fetch('http://localhost:5042/api/Llm/draw', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt })
+  });
+  if (!res.ok) throw new Error('שגיאה בפענוח פרומפט');
+  return res.json();
+}
+
+// שמירת ציור
+export async function saveDrawing(drawing: { name: string; commands: DrawCommand[]; userId?: string }): Promise<any> {
+  const res = await fetch('http://localhost:5042/api/Drawings', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(drawing)
+  });
+  if (!res.ok) throw new Error('שגיאה בשמירת הציור');
+  return res.json();
+}
+
+// טעינת ציור לפי מזהה
+export async function loadDrawing(id: string): Promise<{ commands: DrawCommand[]; name: string }> {
+  const res = await fetch(`http://localhost:5042/api/Drawings/${id}`);
+  if (!res.ok) throw new Error('שגיאה בטעינת הציור');
+  return res.json();
+}
+
+// ניתן להוסיף כאן פונקציות נוספות: saveDrawing, loadDrawing וכו'

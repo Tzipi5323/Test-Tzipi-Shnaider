@@ -40,14 +40,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-// הגדרת CORS - אפשר חיבור מה-Frontend (למשל React ב-localhost:3000)
+// הגדרת CORS - אפשר חיבור מה-Frontend (למשל React ב-localhost:5175)
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(
         "AllowFrontend",
         policy =>
             policy
-                .WithOrigins("http://localhost:3000") // שנה לכתובת הפרונט שלך
+                .WithOrigins("http://localhost:5175")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials()
