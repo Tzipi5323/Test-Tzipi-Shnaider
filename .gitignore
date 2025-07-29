@@ -1,0 +1,6 @@
+# Ignore sensitive and build files
+server/appsettings.json
+server/appsettings.Development.json
+server/bin/
+server/obj/
+.env

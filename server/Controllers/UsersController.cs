@@ -54,7 +54,7 @@ namespace Server.Controllers
 
             _logger.LogInformation("User {UserName} logged in successfully", user.UserName);
 
-            var jwtKey = "SuperSecretKey12345!"; // אותו מפתח כמו ב-Program.cs
+            var jwtKey = "SuperSecretKey12345!"; // יש להחליף במפתח סודי אמיתי
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(jwtKey);
             var tokenDescriptor = new SecurityTokenDescriptor

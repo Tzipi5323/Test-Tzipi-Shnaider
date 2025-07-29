@@ -98,7 +98,7 @@ function App() {
 
   return (
     <div style={{ maxWidth: 600, margin: 'auto', padding: 16, direction: 'rtl', fontFamily: 'Heebo, Arial, sans-serif', background: '#f7fafd', borderRadius: 16, boxShadow: '0 4px 24px #1976d210' }}>
-      <h2 style={{ textAlign: 'center', color: '#1976d2', marginBottom: 24 }}>אפליקציית ציור מבוססת פרומפט</h2>
+      <h2 style={{ textAlign: 'center', color: '#1976d2', marginBottom: 24 }}>ציור בכיף עם AI :)</h2>
       <PromptInput onSubmit={handlePrompt} />
       <Toolbar
         onUndo={handleUndo}

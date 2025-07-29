@@ -31,4 +31,3 @@ export async function loadDrawing(id: string): Promise<{ commands: DrawCommand[]
   return res.json();
 }
 
-// ניתן להוסיף כאן פונקציות נוספות: saveDrawing, loadDrawing וכו'

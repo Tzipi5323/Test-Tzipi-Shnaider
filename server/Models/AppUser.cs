@@ -10,6 +10,5 @@ namespace Server.Models
             ErrorMessage = "UserName must contain only letters and numbers."
         )]
         public string UserName { get; set; } = string.Empty;
-        // ניתן להרחיב כאן שדות נוספים בעתיד
     }
 }
