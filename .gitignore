@@ -3,4 +3,6 @@ server/appsettings.json
 server/appsettings.Development.json
 server/bin/
 server/obj/
+server/Server.Tests/bin/
+server/Server.Tests/obj/
 .env
