@@ -522,3 +522,13 @@ C:\Users\user1\Desktop\Test-Tzipi-Shnaider\server\obj\Debug\net8.0\refint\Server
 C:\Users\user1\Desktop\Test-Tzipi-Shnaider\server\obj\Debug\net8.0\Server.pdb
 C:\Users\user1\Desktop\Test-Tzipi-Shnaider\server\obj\Debug\net8.0\Server.genruntimeconfig.cache
 C:\Users\user1\Desktop\Test-Tzipi-Shnaider\server\obj\Debug\net8.0\ref\Server.dll
+C:\Users\user1\Desktop\Test-Tzipi-Shnaider\server\bin\Debug\net8.0\Server.Tests\obj\Debug\net8.0\Server.Tests.sourcelink.json
+C:\Users\user1\Desktop\Test-Tzipi-Shnaider\server\bin\Debug\net8.0\Server.Tests\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\user1\Desktop\Test-Tzipi-Shnaider\server\bin\Debug\net8.0\Server.Tests\bin\Debug\net8.0\appsettings.json
+C:\Users\user1\Desktop\Test-Tzipi-Shnaider\server\bin\Debug\net8.0\Server.Tests\bin\Debug\net8.0\Server.deps.json
+C:\Users\user1\Desktop\Test-Tzipi-Shnaider\server\bin\Debug\net8.0\Server.Tests\bin\Debug\net8.0\Server.runtimeconfig.json
+C:\Users\user1\Desktop\Test-Tzipi-Shnaider\server\bin\Debug\net8.0\Server.Tests\bin\Debug\net8.0\Server.Tests.deps.json
+C:\Users\user1\Desktop\Test-Tzipi-Shnaider\server\bin\Debug\net8.0\Server.Tests\bin\Debug\net8.0\Server.Tests.runtimeconfig.json
+C:\Users\user1\Desktop\Test-Tzipi-Shnaider\server\bin\Debug\net8.0\Server.Tests\bin\Debug\net8.0\Server.Tests\obj\Debug\net8.0\Server.Tests.sourcelink.json
+C:\Users\user1\Desktop\Test-Tzipi-Shnaider\server\bin\Debug\net8.0\Server.Tests\bin\Debug\net8.0\Server.Tests\obj\project.assets.json
+C:\Users\user1\Desktop\Test-Tzipi-Shnaider\server\bin\Debug\net8.0\Server.Tests\bin\Debug\net8.0\Server.Tests\obj\Server.Tests.csproj.nuget.dgspec.json

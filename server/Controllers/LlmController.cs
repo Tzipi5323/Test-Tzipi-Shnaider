@@ -5,9 +5,17 @@ namespace Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     public class LlmController : ControllerBase
     {
+        private readonly string _openAiApiKey;
+
+        public LlmController(IConfiguration config)
+        {
+            _openAiApiKey =
+                config["OpenAI:ApiKey"] ?? throw new Exception("Missing OpenAI API key");
+        }
+
         /// <summary>
         /// מקבל פרומפט טקסטואלי ומחזיר JSON של פקודות ציור (LLM).
         /// </summary>
@@ -21,8 +29,7 @@ namespace Server.Controllers
             if (string.IsNullOrWhiteSpace(request?.Prompt))
                 return BadRequest("Prompt is required");
 
-            // יש להכניס כאן את ה-API Key שלך
-            var apiKey = "YOUR_OPENAI_API_KEY";
+            var apiKey = _openAiApiKey;
             var apiUrl = "https://api.openai.com/v1/chat/completions";
 
             var prompt =

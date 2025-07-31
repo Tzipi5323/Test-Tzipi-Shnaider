@@ -1,4 +1,3 @@
-
 import type { DrawCommand } from './types';
 
 
@@ -20,7 +19,12 @@ export async function saveDrawing(drawing: { name: string; commands: DrawCommand
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(drawing)
   });
-  if (!res.ok) throw new Error('שגיאה בשמירת הציור');
+  if (!res.ok) {
+    // קרא את גוף התגובה (response body) וזרוק אותו לשגיאה
+    let errorText = await res.text();
+    console.error('שגיאה בשמירת הציור:', errorText);
+    throw new Error(`שגיאה בשמירת הציור: ${errorText}`);
+  }
   return res.json();
 }
 

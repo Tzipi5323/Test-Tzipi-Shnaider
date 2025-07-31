@@ -84,6 +84,17 @@ npm run dev
 - To use a different LLM provider (e.g., Google Gemini), update the logic in `LlmController.cs`.
 - Drawing command types can be extended in `client/src/types.ts` and `CanvasDraw.tsx`.
 
+## Secret Configuration
+
+Before running the project, copy `server/appsettings.example.json` to `server/appsettings.json`  
+and fill in your secret values (such as OpenAI ApiKey and Jwt Key).
+
+```bash
+cp server/appsettings.example.json server/appsettings.json
+```
+
+**Do not commit your real appsettings.json file to the repository.**
+
 ## License
 This project is for demonstration and educational purposes.
 

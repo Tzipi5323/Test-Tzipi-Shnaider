@@ -7,7 +7,7 @@ namespace Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Microsoft.AspNetCore.Authorization.Authorize]
+    // [Microsoft.AspNetCore.Authorization.Authorize]
     public class DrawingsController : ControllerBase
     {
         private readonly AppDbContext _context;
