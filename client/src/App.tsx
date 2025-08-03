@@ -5,48 +5,33 @@ import SaveForm from './components/SaveForm';
 import LoadForm from './components/LoadForm';
 import UserPanel from './components/UserPanel';
 import { decodePrompt } from './api';
-import type { DrawCommand } from './types';
-import type { User } from './types';
+import { useDrawingHistory } from './hooks/useDrawingHistory'; // ייבוא ה-hook החדש
+import { useCurrentUser } from './hooks/useCurrentUser';
 
 function App() {
-  const [commands, setCommands] = useState<DrawCommand[]>([]);
-  const [history, setHistory] = useState<DrawCommand[][]>([]);
-  const [future, setFuture] = useState<DrawCommand[][]>([]);
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const {
+    commands,
+    addCommands,
+    undo,
+    redo,
+    clear,
+    canUndo,
+    canRedo,
+    canClear,
+  } = useDrawingHistory();
+
+  const { currentUser, setCurrentUser } = useCurrentUser();
+
   const [drawingName, setDrawingName] = useState('');
   const [drawingId, setDrawingId] = useState('');
 
   const handlePrompt = async (prompt: string) => {
     try {
       const newCommands = await decodePrompt(prompt);
-      setHistory([...history, commands]);
-      setCommands([...commands, ...newCommands]); // מוסיף במקום להחליף
-      setFuture([]);
-    } catch (err) {
+      addCommands(newCommands);
+    } catch {
       alert('שגיאה בפענוח פרומפט');
     }
-  };
-
-  const handleUndo = () => {
-    if (history.length) {
-      setFuture([commands, ...future]);
-      setCommands(history[history.length - 1]);
-      setHistory(history.slice(0, -1));
-    }
-  };
-
-  const handleRedo = () => {
-    if (future.length) {
-      setHistory([...history, commands]);
-      setCommands(future[0]);
-      setFuture(future.slice(1));
-    }
-  };
-
-  const handleClear = () => {
-    setHistory([...history, commands]);
-    setCommands([]);
-    setFuture([]);
   };
 
   return (
@@ -55,12 +40,12 @@ function App() {
       <UserPanel currentUser={currentUser} setCurrentUser={setCurrentUser} />
       <PromptInput onSubmit={handlePrompt} />
       <Toolbar
-        onUndo={handleUndo}
-        onRedo={handleRedo}
-        onClear={handleClear}
-        canUndo={!!history.length}
-        canRedo={!!future.length}
-        canClear={!!commands.length}
+        onUndo={undo}
+        onRedo={redo}
+        onClear={clear}
+        canUndo={canUndo}
+        canRedo={canRedo}
+        canClear={canClear}
         loading={false}
       />
       <SaveForm
@@ -75,9 +60,8 @@ function App() {
         setDrawingId={setDrawingId}
         onLoadSuccess={drawing => {
           setDrawingName(drawing.name || '');
-          // המרה: כל פקודה -> JSON.parse(commandJson)
           const parsedCommands = drawing.commands.map(cmd => JSON.parse(cmd.commandJson));
-          setCommands(parsedCommands);
+          addCommands(parsedCommands); // השתמש ב-addCommands במקום setCommands
         }}
       />
       <CanvasDraw commands={commands} width={500} height={400} />

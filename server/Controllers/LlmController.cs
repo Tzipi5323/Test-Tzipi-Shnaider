@@ -1,11 +1,9 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    //[Authorize]
     public class LlmController : ControllerBase
     {
         private readonly string _openAiApiKey;
@@ -78,7 +76,8 @@ namespace Server.Controllers
             }
             catch
             {
-                return Ok(result);
+                // תיקון: החזרת שגיאה במקום טקסט גולמי
+                return BadRequest("LLM did not return valid JSON commands.");
             }
         }
     }

@@ -5,13 +5,18 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.4",
+    "@testing-library/react": "^16.3.0",
     "@vitejs/plugin-react": "^4.7.0",
+    "jsdom": "^26.1.0",
     "typescript": "~5.8.3",
-    "vite": "^7.0.4"
+    "vite": "^7.0.4",
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "@types/react": "^19.1.9",

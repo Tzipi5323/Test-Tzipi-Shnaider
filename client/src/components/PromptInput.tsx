@@ -16,7 +16,11 @@ const PromptInput: React.FC<PromptInputProps> = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', gap: 12, margin: '16px 0' }}>
+    <form
+      data-testid="prompt-form"
+      style={{ display: 'flex', gap: 12, margin: '16px 0' }}
+      onSubmit={handleSubmit}
+    >
       <input
         type="text"
         value={prompt}

@@ -10,7 +10,6 @@ namespace Server.Data
 
         public DbSet<AppUser> Users { get; set; }
         public DbSet<Drawing> Drawings { get; set; }
-
         public DbSet<DrawingCommand> DrawingCommands { get; set; }
         public DbSet<RedoDrawingCommand> RedoDrawingCommands { get; set; }
 

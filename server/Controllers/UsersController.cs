@@ -54,7 +54,11 @@ namespace Server.Controllers
 
             _logger.LogInformation("User {UserName} logged in successfully", user.UserName);
 
-            var jwtKey = "SuperSecretKey12345!"; // יש להחליף במפתח סודי אמיתי
+            // תיקון: משיכת המפתח מהקונפיגורציה
+            var jwtKey = HttpContext.RequestServices.GetService<IConfiguration>()?["Jwt:Key"];
+            if (string.IsNullOrEmpty(jwtKey))
+                throw new Exception("Missing JWT key in configuration");
+
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(jwtKey);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -106,6 +110,23 @@ namespace Server.Controllers
             return user;
         }
 
+        // שליפת משתמש בודד לפי שם משתמש
+        /// <summary>
+        /// מחזיר משתמש בודד לפי שם משתמש.
+        /// </summary>
+        /// <param name="userName">שם המשתמש</param>
+        /// <returns>אובייקט משתמש</returns>
+        /// <response code="200">המשתמש נמצא</response>
+        /// <response code="404">המשתמש לא נמצא</response>
+        [HttpGet("by-username/{userName}")]
+        public async Task<ActionResult<AppUser>> GetUserByUserName(string userName)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName);
+            if (user == null)
+                return NotFound();
+            return user;
+        }
+
         // יצירת משתמש חדש
         /// <summary>
         /// יוצר משתמש חדש במערכת.
@@ -117,13 +138,19 @@ namespace Server.Controllers
         [HttpPost]
         public async Task<ActionResult<AppUser>> CreateUser(AppUser user)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            // בדיקת כפילות מזהה או שם משתמש
+            if (await _context.Users.AnyAsync(u => u.Id == user.Id || u.UserName == user.UserName))
+            {
+                _logger.LogWarning("Attempt to create duplicate user: {UserName} (ID: {UserId})", user.UserName, user.Id);
+                return BadRequest("משתמש עם מזהה או שם זה כבר קיים");
+            }
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            _logger.LogInformation(
-                "New user created: {UserName} (ID: {UserId})",
-                user.UserName,
-                user.Id
-            );
+            _logger.LogInformation("New user created: {UserName} (ID: {UserId})", user.UserName, user.Id);
             return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
         }
     }

@@ -1,6 +1,5 @@
 import type { DrawCommand } from './types';
 
-
 // פענוח פרומפט ע"י LLM
 export async function decodePrompt(prompt: string): Promise<DrawCommand[]> {
   const res = await fetch('http://localhost:5042/api/Llm/draw', {

@@ -26,7 +26,7 @@ const LoadForm: React.FC<LoadFormProps> = ({
       const res = await loadDrawing(drawingId);
       onLoadSuccess(res);
       setError('הציור נטען בהצלחה!');
-      setTimeout(() => setError(null), 2500); // ייעלם אחרי 2.5 שניות
+      setTimeout(() => setError(null), 2500);
     } catch (err: any) {
       setError(err.message || 'שגיאה בטעינה');
     } finally {
